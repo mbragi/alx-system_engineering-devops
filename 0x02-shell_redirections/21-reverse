@@ -1,0 +1,2 @@
+#!/bin/bash
+echo "reverse words like skrrr skrr" |rev
