@@ -1,0 +1,20 @@
+#!/bin/bash
+
+count=0
+
+# Iterate through each entry in the current directory
+for entry in ./*; do
+    # Check if the entry is a directory
+    if [ -d "$entry" ]; then
+        # Exclude the current directory and parent directory
+        if [ "$entry" != "." ] && [ "$entry" != ".." ]; then
+            count=$((count+1))
+        fi
+    fi
+done
+
+# Count hidden directories
+hidden_dirs=$(find . -type d -name ".*" | wc -l)
+count=$((count+hidden_dirs))
+
+echo "$count"
