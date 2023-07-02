@@ -1,2 +1,17 @@
 #!/bin/bash
-cp -u *.htm ..
+
+# Get the current working directory
+current_dir=$(pwd)
+
+# Get the parent directory
+parent_dir=$(dirname "$current_dir")
+
+# Iterate over HTML files in the current directory
+for file in *.html; do
+    # Check if the file already exists in the parent directory or if it's newer
+    if [[ -e "$parent_dir/$file" && "$current_dir/$file" -nt "$parent_dir/$file" ]]; then
+        echo "Copying $file to $parent_dir/$file"
+        cp "$current_dir/$file" "$parent_dir/$file"
+    fi
+done
+
